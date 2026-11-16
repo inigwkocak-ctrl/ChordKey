@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chordkey</title>
+<meta name="theme-color" content="#000000">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Chordkey">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ff7ac0'/%3E%3Cstop offset='1' stop-color='%23ff2d8f'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Cg fill='none' stroke='%23000' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M31 22.5A12 12 0 1 0 31 41.5'/%3E%3Cpath d='M40 20V44M52 20L40.5 33M44 30.5L53 44'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+:root{--bg:#000000;--fg:#ffffff;--mut:#a89aa2;--ac:#ff4fa3;--acfg:#000000;--bd:#2e1a26;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000000;--fg:#ffffff;--mut:#a89aa2;--ac:#ff4fa3;--acfg:#000000;--bd:#2e1a26}}
+:root[data-theme="dark"]{--bg:#000000;--fg:#ffffff;--mut:#a89aa2;--ac:#ff4fa3;--acfg:#000000;--bd:#2e1a26}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:radial-gradient(60% 40% at 15% 8%,rgba(255,79,163,.38),transparent 70%),radial-gradient(55% 45% at 92% 62%,rgba(150,70,255,.28),transparent 70%),var(--bg);background-attachment:fixed;color:var(--fg);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:560px;margin:0 auto;padding:40px 20px;text-align:center}
+h1{font-size:1.3rem;font-weight:700;margin:0 0 28px;color:var(--fg);letter-spacing:-.01em}
+h1 small{display:block;font-size:.75rem;font-weight:400;margin-top:2px;color:var(--ac)}
+.logo{display:block;width:60px;height:60px;margin:0 auto 12px}
+.big{font-size:clamp(5rem,26vw,9rem);font-weight:700;line-height:1.1;letter-spacing:-.04em}
+.meta{display:flex;justify-content:center;gap:32px;color:var(--mut);margin:8px 0 28px}
+.meta b{color:var(--fg);font-size:1.4rem;font-weight:600}
+.row{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+button,.btn{font:inherit;color:var(--fg);border:1px solid rgba(255,255,255,.2);background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,.05));-webkit-backdrop-filter:blur(18px) saturate(180%);backdrop-filter:blur(18px) saturate(180%);box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 6px 18px rgba(0,0,0,.35);border-radius:999px;padding:9px 20px;cursor:pointer;transition:transform .12s ease,background .2s ease}
+button:active,.btn:active{transform:scale(.95)}
+.btn.pri{background:linear-gradient(180deg,rgba(255,130,196,.8),rgba(255,45,143,.55));border-color:rgba(255,255,255,.4);color:#ffffff;font-weight:600}
+input[type=file]{display:none}
+#status{color:var(--mut);font-size:.85rem;min-height:1.3em}
+.bar{height:3px;background:var(--bd);border-radius:2px;overflow:hidden;margin:10px 0;display:none}
+.bar i{display:block;height:100%;width:0;background:var(--ac)}
+.piano{position:relative;display:flex;height:110px;max-width:360px;margin:0 auto 26px}
+.w{flex:1;border:1px solid #9a9a9a;background:#ffffff;border-radius:0 0 8px 8px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;font-size:.7rem;color:#555555}
+.w.on{background:var(--ac);border-color:var(--ac);color:var(--acfg);font-weight:700}
+.bk{position:absolute;top:0;width:9%;height:62%;transform:translateX(-50%);background:#000000;border:1px solid #5a5a5a;border-radius:0 0 5px 5px}
+.bk.on{background:var(--ac);outline:2px solid var(--bg)}
+audio{width:100%;margin-top:14px}
+#tl{margin-top:28px;display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;max-height:180px;overflow:auto;color:var(--mut)}
+#tl span{cursor:pointer;padding:0 4px;border-radius:6px}
+#tl span.on{background:var(--ac);color:var(--acfg)}
+.tr{display:inline-flex;align-items:center;gap:6px;color:var(--mut);font-size:.9rem}
+.tr button{padding:8px 14px;min-width:44px}
+button,.btn{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+.adj button{padding:2px 12px;font-size:.8rem;margin:6px 3px 0}
+#bsrc{display:block;font-size:.7rem;min-height:1.2em;margin-top:4px}
+</style>
+</head>
+<body>
+<main>
+  <h1><svg class="logo" viewBox="0 0 64 64" role="img" aria-label="Logo Chordkey"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff7ac0"/><stop offset="1" stop-color="#ff2d8f"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="url(#lg)"/><g fill="none" stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M31 22.5A12 12 0 1 0 31 41.5"/><path d="M40 20V44M52 20L40.5 33M44 30.5L53 44"/></g><rect x="14" y="52" width="36" height="3" rx="1.5" fill="#000" opacity=".35"/></svg>Chordkey<small>Dibuat oleh WIMA FVNKY</small></h1>
+  <div class="big" id="cur">–</div>
+  <div class="meta">
+    <div>Berikutnya<br><b id="nxt">–</b></div>
+    <div>Tempo (BPM)<br><b id="bpm">–</b><br><span class="adj"><button id="bh">½</button><button id="bd">×2</button></span><small id="bsrc"></small></div>
+  </div>
+  <div class="piano" id="piano"></div>
+  <div class="row">
+    <label class="btn pri" for="f">Pilih lagu</label>
+    <input id="f" type="file" accept="audio/*">
+    <button id="mic">Mikrofon</button>
+    <span class="tr"><button id="tm" aria-label="Turun">−</button><span id="tv">0</span><button id="tp" aria-label="Naik">+</button></span>
+  </div>
+  <div id="status">Pilih file lagu atau nyalakan mikrofon.</div>
+  <div class="bar" id="bar"><i></i></div>
+  <audio id="au" controls style="display:none"></audio>
+  <div id="tl"></div>
+</main>
+
+<script>
+const NOTES=["C","C♯","D","D♯","E","F","F♯","G","G♯","A","A♯","B"];
+const TPL=[["",[0,4,7],1],["m",[0,3,7],1],["7",[0,4,7,10],.93],["m7",[0,3,7,10],.93]];
+const $=id=>document.getElementById(id);
+let tr=0,segs=[],mode="none",live=null,lastIdx=-1;
+
+function fft(re,im){const n=re.length;
+  for(let i=1,j=0;i<n;i++){let b=n>>1;for(;j&b;b>>=1)j^=b;j^=b;if(i<j){let t=re[i];re[i]=re[j];re[j]=t;t=im[i];im[i]=im[j];im[j]=t}}
+  for(let l=2;l<=n;l<<=1){const a=-2*Math.PI/l,wr=Math.cos(a),wi=Math.sin(a),h=l>>1;
+    for(let i=0;i<n;i+=l){let cr=1,ci=0;
+      for(let k=0;k<h;k++){const u=i+k,v=u+h,xr=re[v]*cr-im[v]*ci,xi=re[v]*ci+im[v]*cr;
+        re[v]=re[u]-xr;im[v]=im[u]-xi;re[u]+=xr;im[u]+=xi;const t=cr*wr-ci*wi;ci=cr*wi+ci*wr;cr=t}}}}
+
+function chromaFrom(mags,sr,N){const c=new Float32Array(12);
+  for(let k=1;k<mags.length;k++){const f=k*sr/N;if(f<80||f>2500)continue;
+    const p=Math.round(12*Math.log2(f/440)+69);c[((p%12)+12)%12]+=Math.sqrt(mags[k])}
+  return c}
+
+function match(c){let tot=0;for(const v of c)tot+=v*v;if(tot<1e-9)return null;const n=Math.sqrt(tot);
+  let best=null,bs=0;
+  for(let r=0;r<12;r++)for(const [q,iv,w] of TPL){let s=0;for(const i of iv)s+=c[(r+i)%12];
+    s=s/Math.sqrt(iv.length)/n*w;if(s>bs){bs=s;best={r,q}}}
+  return best}
+
+const name=ch=>ch?NOTES[(ch.r+tr)%12]+ch.q:"–";
+
+async function analyze(buf){
+  const N=8192,hop=Math.round(buf.sampleRate*0.2),sr=buf.sampleRate;
+  const a=buf.getChannelData(0),b=buf.numberOfChannels>1?buf.getChannelData(1):a;
+  const win=new Float32Array(N);for(let i=0;i<N;i++)win[i]=.5-.5*Math.cos(2*Math.PI*i/N);
+  const re=new Float32Array(N),im=new Float32Array(N),mags=new Float32Array(N/2);
+  const frames=[],rmsList=[],total=Math.floor((a.length-N)/hop);
+  for(let f=0;f<total;f++){
+    const o=f*hop;let e=0;
+    for(let i=0;i<N;i++){const s=(a[o+i]+b[o+i])*.5;e+=s*s;re[i]=s*win[i];im[i]=0}
+    fft(re,im);
+    for(let k=0;k<N/2;k++)mags[k]=Math.hypot(re[k],im[k]);
+    frames.push(chromaFrom(mags,sr,N));rmsList.push(Math.sqrt(e/N));
+    if(f%40===0){setProg(f/total);await new Promise(r=>setTimeout(r))}
+  }
+  const rough=frames.map((_,i)=>{
+    if(rmsList[i]<0.008)return null;
+    const c=new Float32Array(12);
+    for(let d=-2;d<=2;d++){const fr=frames[i+d];if(!fr)continue;for(let k=0;k<12;k++)c[k]+=fr[k]}
+    return match(c)});
+  const key=x=>x?x.r+"_"+x.q:"N";
+  const sm=rough.map((_,i)=>{const cnt={};let best=null,bc=0;
+    for(let d=-3;d<=3;d++){const x=rough[i+d];if(x===undefined)continue;const k=key(x);cnt[k]=(cnt[k]||0)+1;
+      if(cnt[k]>bc){bc=cnt[k];best=x}}
+    return best});
+  const out=[];let last="";
+  sm.forEach((x,i)=>{const k=key(x);if(k!==last){out.push({t:i*hop/sr,ch:x});last=k}});
+  return out;
+}
+
+/* BPM asli dari tag ID3 (TBPM) bila ada di file MP3 */
+function id3Bpm(ab){try{const v=new DataView(ab);if(v.getUint8(0)!==73||v.getUint8(1)!==68||v.getUint8(2)!==51)return null;
+  const ver=v.getUint8(3),ss=o=>(v.getUint8(o)<<21)|(v.getUint8(o+1)<<14)|(v.getUint8(o+2)<<7)|v.getUint8(o+3);
+  const end=Math.min(10+ss(6),ab.byteLength-10);let p=10;
+  while(p<end){if(v.getUint8(p)===0)break;const id=String.fromCharCode(v.getUint8(p),v.getUint8(p+1),v.getUint8(p+2),v.getUint8(p+3));
+    const sz=ver===4?ss(p+4):v.getUint32(p+4);if(!sz)break;
+    if(id==='TBPM'){let s='';const by=new Uint8Array(ab,p+11,Math.max(0,sz-1));for(const c of by)if((c>=48&&c<=57)||c===46)s+=String.fromCharCode(c);const n=parseFloat(s);return n>=40&&n<=300?n:null}
+    p+=10+sz}}catch(e){}return null}
+
+/* BPM dari audio: spectral flux + autokorelasi + pencocokan beat halus (presisi ~0,1 BPM) */
+function detectBPM(buf){
+  const sr=buf.sampleRate,a=buf.getChannelData(0),b=buf.numberOfChannels>1?buf.getChannelData(1):a;
+  const N=1024,H=512,span=Math.min(a.length,sr*300),st=a.length>span?Math.floor((a.length-span)/2):0,n=Math.floor((span-N)/H);
+  if(n<300)return null;
+  const rate=sr/H,kmax=Math.min(N/2,Math.floor(8000*N/sr));
+  const win=new Float32Array(N);for(let i=0;i<N;i++)win[i]=.5-.5*Math.cos(2*Math.PI*i/N);
+  const re=new Float32Array(N),im=new Float32Array(N),prev=new Float32Array(kmax),raw=new Float32Array(n);
+  for(let f=0;f<n;f++){const o=st+f*H;
+    for(let i=0;i<N;i++){re[i]=(a[o+i]+b[o+i])*.5*win[i];im[i]=0}
+    fft(re,im);let fl=0;
+    for(let k=1;k<kmax;k++){const m=Math.log(1+100*Math.hypot(re[k],im[k])),d=m-prev[k];if(d>0)fl+=d;prev[k]=m}
+    raw[f]=fl}
+  const cs=new Float64Array(n+1);for(let i=0;i<n;i++)cs[i+1]=cs[i]+raw[i];
+  const w=Math.round(rate*.5),on=new Float32Array(n);
+  for(let i=0;i<n;i++){const lo=Math.max(0,i-w),hi=Math.min(n,i+w);on[i]=Math.max(0,raw[i]-(cs[hi]-cs[lo])/(hi-lo))}
+  const minL=Math.floor(60*rate/200),maxL=Math.ceil(60*rate/60),ac=new Float32Array(3*maxL+4);
+  for(let L=1;L<ac.length&&L<n/2;L++){let s=0;for(let i=0;i+L<n;i++)s+=on[i]*on[i+L];ac[L]=s/(n-L)}
+  let best=0,bl=0;
+  for(let L=minL;L<=maxL;L++){const bpm=60*rate/L,pr=Math.exp(-.5*Math.pow(Math.log2(bpm/115)/.7,2)),v=(ac[L]+.5*ac[2*L]+.25*ac[3*L])*pr;if(v>best){best=v;bl=L}}
+  if(!bl)return null;
+  const base=60*rate/bl;let bb=base,bs=-1;
+  for(let bpm=base*.97;bpm<=base*1.03;bpm+=base*.0005){const P=60*rate/bpm;let m=0;
+    for(let p0=0;p0<P;p0+=.5){let s=0,c=0;for(let t=p0;t<n-1;t+=P){const i=t|0,fr=t-i;s+=on[i]*(1-fr)+on[i+1]*fr;c++}s/=c;if(s>m)m=s}
+    if(m>bs){bs=m;bb=bpm}}
+  return bb;
+}
+
+let curBpm=null;
+function setBpm(v,src){curBpm=v||null;$("bpm").textContent=v?String(Math.round(v*10)/10):"–";$("bsrc").textContent=v&&src?src:""}
+$("bh").onclick=()=>{if(curBpm)setBpm(curBpm/2,"disesuaikan")};
+$("bd").onclick=()=>{if(curBpm)setBpm(curBpm*2,"disesuaikan")};
+
+function setProg(p){const bar=$("bar");bar.style.display=p>=1?"none":"block";bar.firstElementChild.style.width=(p*100)+"%"}
+
+function buildPiano(){const p=$("piano");p.innerHTML="";
+  [0,2,4,5,7,9,11].forEach(n=>{const d=document.createElement("div");d.className="w";d.id="k"+n;d.textContent=NOTES[n];p.appendChild(d)});
+  [[1,1],[3,2],[6,4],[8,5],[10,6]].forEach(([n,pos])=>{const d=document.createElement("div");d.className="bk";d.id="k"+n;d.style.left=(pos/7*100)+"%";p.appendChild(d)})}
+function showChord(ch,next){$("cur").textContent=name(ch);$("nxt").textContent=next?name(next):"–";
+  const on=new Set();if(ch){TPL.find(t=>t[0]===ch.q)[1].forEach(i=>on.add((ch.r+tr+i)%12))}
+  for(let i=0;i<12;i++)$("k"+i).classList.toggle("on",on.has(i))}
+function renderTL(){const t=$("tl");t.innerHTML="";
+  segs.forEach((s,i)=>{const d=document.createElement("span");d.id="c"+i;d.textContent=name(s.ch);
+    d.onclick=()=>{$("au").currentTime=s.t;$("au").play()};t.appendChild(d)})}
+function idxAt(time){let lo=0,hi=segs.length-1,r=0;
+  while(lo<=hi){const m=(lo+hi)>>1;if(segs[m].t<=time){r=m;lo=m+1}else hi=m-1}return r}
+function tick(){
+  if(mode==="file"&&segs.length){const i=idxAt($("au").currentTime);
+    if(i!==lastIdx){lastIdx=i;showChord(segs[i].ch,segs[i+1]&&segs[i+1].ch);
+      document.querySelectorAll("#tl .on").forEach(e=>e.classList.remove("on"));
+      const c=$("c"+i);if(c){c.classList.add("on");const box=$("tl");box.scrollTop=c.offsetTop-box.offsetTop-box.clientHeight/2+10}}}
+  requestAnimationFrame(tick)}
+requestAnimationFrame(tick);
+
+$("f").onchange=async e=>{
+  const file=e.target.files[0];if(!file)return;
+  stopMic();mode="file";lastIdx=-1;setBpm(null);
+  $("status").textContent="Menganalisis "+file.name+" …";
+  try{
+    const ac=new (window.AudioContext||window.webkitAudioContext)();
+    const ab=await file.arrayBuffer();const tagBpm=id3Bpm(ab);const buf=await new Promise((res,rej)=>{const p=ac.decodeAudioData(ab,res,rej);if(p&&p.catch)p.catch(rej)});ac.close();
+    const au=$("au");au.src=URL.createObjectURL(file);au.style.display="block";
+    segs=await analyze(buf);setProg(1);
+    setBpm(tagBpm||detectBPM(buf),tagBpm?"dari tag file":"hasil analisis");
+    $("status").textContent="Selesai. Tekan play.";
+    renderTL();showChord(null,segs[0]&&segs[0].ch);
+  }catch(err){$("status").textContent="Gagal membaca audio: "+err.message}
+};
+
+function stopMic(){if(live){live.stop=true;live.stream.getTracks().forEach(t=>t.stop());live.ctx.close();live=null;$("mic").textContent="Mikrofon"}}
+$("mic").onclick=async()=>{
+  if(live){stopMic();mode="none";$("status").textContent="Mikrofon dimatikan.";return}
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});
+    $("au").pause();mode="live";setBpm(null);$("tl").innerHTML="";
+    const ctx=new (window.AudioContext||window.webkitAudioContext)();
+    if(ctx.state==="suspended")ctx.resume();
+    const an=ctx.createAnalyser();an.fftSize=8192;an.smoothingTimeConstant=0;
+    ctx.createMediaStreamSource(stream).connect(an);
+    live={stream,ctx,stop:false};$("mic").textContent="Stop";
+    $("status").textContent="Mendengarkan …";
+    const data=new Float32Array(an.frequencyBinCount),acc=new Float32Array(12);let shown="";
+    const loop=()=>{if(!live||live.stop)return;
+      an.getFloatFrequencyData(data);
+      const mags=data.map(db=>Math.pow(10,db/20)),c=chromaFrom(mags,ctx.sampleRate,an.fftSize);
+      let s=0;for(const v of c)s+=v;
+      if(s>0){const energy=Math.max(...data);
+        for(let k=0;k<12;k++)acc[k]=acc[k]*.85+(c[k]/s)*.15;
+        const ch=energy>-70?match(acc):null,k=ch?ch.r+ch.q:"";
+        if(k!==shown){shown=k;showChord(ch,null)}}
+      requestAnimationFrame(loop)};
+    loop();
+  }catch(err){$("status").textContent="Mikrofon tidak bisa diakses: "+err.message}
+};
+
+function setTr(d){tr=(tr+d+12)%12;const v=tr>6?tr-12:tr;$("tv").textContent=(v>0?"+":"")+v;
+  renderTL();lastIdx=-1}
+$("tm").onclick=()=>setTr(-1);$("tp").onclick=()=>setTr(1);
+buildPiano();
+(function(){try{const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff7ac0"/><stop offset="1" stop-color="#ff2d8f"/></linearGradient></defs><rect width="64" height="64" fill="url(#g)"/><g fill="none" stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M31 22.5A12 12 0 1 0 31 41.5"/><path d="M40 20V44M52 20L40.5 33M44 30.5L53 44"/></g></svg>';
+  const img=new Image();img.onload=()=>{const c=document.createElement("canvas");c.width=c.height=180;c.getContext("2d").drawImage(img,0,0,180,180);
+    const l=document.createElement("link");l.rel="apple-touch-icon";l.href=c.toDataURL("image/png");document.head.appendChild(l)};
+  img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg)}catch(e){}})();
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "appId": "com.wimafvnky.chordkey",
+  "appName": "Chordkey",
+  "webDir": "www",
+  "backgroundColor": "#000000",
+  "server": { "androidScheme": "https" }
+}
